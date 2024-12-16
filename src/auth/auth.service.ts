@@ -536,13 +536,15 @@ export class AuthService {
     };
   }
 
+    async logout(data: Pick<JwtRefreshPayloadType, 'sessionId'>) {
+    return this.sessionService.deleteById(data.sessionId);
+  }
+
   async softDelete(user: User): Promise<void> {
     await this.usersService.remove(user.id);
   }
 
-  async logout(data: Pick<JwtRefreshPayloadType, 'sessionId'>) {
-    return this.sessionService.deleteById(data.sessionId);
-  }
+
 
   private async getTokensData(data: {
     id: User['id'];
